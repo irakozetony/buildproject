@@ -1,0 +1,3 @@
+#404 Error page
+
+ErrorDocument 404 http://localhost/buildproject/404.php

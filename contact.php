@@ -2,26 +2,6 @@
 include('inc/header.php');
 include('inc/navbar.php');
 ?>
-<script>
-$(document).ready(function(){
-    $("form").submit(function(evemt){
-      event.preventDefault();
-      var name = $("#contact-name").val();
-      var email = $("#contact-email").val();
-      var subject = $("#contact-subject").val();
-      var message = $("#contact-message").val();
-      var submit = $("#contact-submit").val();
-
-      $("#form-message").load("contact_code.php", {
-        name: name,
-        email: email,
-        subject: subject,
-        message: message,
-        submit: submit
-      });
-    });
-});
-</script>
 <main id="main">
 
   <!-- ======= Breadcrumbs ======= -->
@@ -97,8 +77,6 @@ $(document).ready(function(){
             </div>
             <div class="text-center">
               <button type="submit" id="contact-submit" name="send" class="btn" style="background-color: #f03c02; color:white;">Send Message</button>
-            </div>
-            <div class="card mb-4 py-3" id="form-message">
             </div>
           </form>
         </div>

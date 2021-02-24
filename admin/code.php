@@ -9,38 +9,54 @@ if (isset($_POST['registerbutton'])) {
     $cpassword = mysqli_real_escape_string($connection, $_POST['cpassword']);
     $usertype = mysqli_real_escape_string($connection, $_POST['usertype']);
 
+    $check_users = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
+    $result = mysqli_query($connection, $check_users) or die(mysqli_error($connection));
+    $user = mysqli_fetch_assoc($result);
+
+    if($user){
+        if($user['username'] == $company_name){
+            $_SESSION['status'] = "Company already exists.";
+            header('location: login.php');
+        }
+        if($user['email'] == $company_email){
+            $_SESSION['status'] = "Company email already registered. Try logging in";
+            header('location: login.php');
+        }
+    }
     if ($password === $cpassword) {
-        if ($usertype == "admin") {
-            $useractive = 1;
-            $query = "INSERT INTO users (username, email, phone, password, usertype, useractive) VALUES ('$username','$email','$phone','$password', '$usertype', '$useractive')";
-            $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
-            if ($query_run) {
-                $_SESSION['success'] = "admin profile created";
-                header("location:admins.php");
-                $query2 = "INSERT INTO admins(username, email, phone, password, usertype) VALUES ('$username', '$email', '$phone', '$password', '$usertype')";
-                $query_run2 = mysqli_query($connection, $query2) or die(mysqli_error($connection));
-                if (!$query_run2) {
-                    $_SESSION['status'] = "Profile not created";
+        if($_SESSION['status'] == ''){
+            if ($usertype == "admin") {
+                $useractive = 1;
+                $query = "INSERT INTO users (username, email, phone, password, usertype, useractive) VALUES ('$username','$email','$phone','$password', '$usertype', '$useractive')";
+                $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
+                if ($query_run) {
+                    $_SESSION['success'] = "admin profile created";
+                    header("location:admins.php");
+                    $query2 = "INSERT INTO admins(username, email, phone, password, usertype) VALUES ('$username', '$email', '$phone', '$password', '$usertype')";
+                    $query_run2 = mysqli_query($connection, $query2) or die(mysqli_error($connection));
+                    if (!$query_run2) {
+                        $_SESSION['status'] = "Profile not created";
+                    }
+                } else {
+                    $_SESSION['status'] = "admin profile not created";
+                    header("location:admins.php");
                 }
             } else {
-                $_SESSION['status'] = "admin profile not created";
-                header("location:admins.php");
-            }
-        } else {
-            $useractive = 1;
-            $query = "INSERT INTO users (username, email, phone, password, usertype, useractive) VALUES ('$username', '$email', '$phone', '$password', '$usertype', '$useractive')";
-            $query_run = mysqli_query($connection, $query);
-            if ($query_run) {
-                $_SESSION['success'] = "company profile created";
-                header("location:admins.php");
-                $query2 = "INSERT INTO companies(username, email, phone, password, usertype) VALUES ('$username', '$email', '$phone', '$password', '$usertype')";
-                $query_run2 = mysqli_query($connection, $query2) or die(mysqli_error($connection));
-                if (!$query_run2) {
-                    $_SESSION['status'] = "Profile not created";
+                $useractive = 1;
+                $query = "INSERT INTO users (username, email, phone, password, usertype, useractive) VALUES ('$username', '$email', '$phone', '$password', '$usertype', '$useractive')";
+                $query_run = mysqli_query($connection, $query);
+                if ($query_run) {
+                    $_SESSION['success'] = "company profile created";
+                    header("location:admins.php");
+                    $query2 = "INSERT INTO companies(username, email, phone, password, usertype) VALUES ('$username', '$email', '$phone', '$password', '$usertype')";
+                    $query_run2 = mysqli_query($connection, $query2) or die(mysqli_error($connection));
+                    if (!$query_run2) {
+                        $_SESSION['status'] = "Profile not created";
+                    }
+                } else {
+                    $_SESSION['status'] = "company profile not created";
+                    header("location:admins.php");
                 }
-            } else {
-                $_SESSION['status'] = "company profile not created";
-                header("location:admins.php");
             }
         }
     } else {
@@ -76,6 +92,9 @@ if (isset($_POST['delete_button'])) {
     $query = "DELETE FROM users WHERE id='$id'";
     $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
     if ($query_run) {
+        $query = "DELETE FROM offices JOIN offices.owner=companies.email WHERE users.id='$id'";
+        $query_run = mysqli_query($connection,$query) or die(mysqli_error($connection));
+        
         $_SESSION['success'] = "Profile Deleted Successfully";
         header("location:admins.php");
     } else {

@@ -28,7 +28,6 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li><a href="index.php">Home</a></li>
-          <li><a href="about.php">About</a></li>
           <li><a href="offices.php">Offices</a></li>
           <li><a href="contact.php">Contact</a></li>
 

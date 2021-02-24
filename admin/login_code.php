@@ -14,10 +14,7 @@ if (isset($_POST['login_button'])) {
     } else if ($usertype['usertype'] == 'company') {
         if ($user['useractive'] == true) {
             $_SESSION['username'] = $email_login;
-            header('location: index.php');
-        } else {
-            $_SESSION['status'] = "Go to company login";
-            header('location: login.php');
+            header('location: ../company/index.php');
         }
     } else {
         $_SESSION['status'] = "Invalid email or password";

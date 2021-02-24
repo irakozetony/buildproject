@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('database/dbconnection.php');
 
 if(isset($_POST['send'])){

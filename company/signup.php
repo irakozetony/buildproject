@@ -26,28 +26,28 @@ include('inc/header.php');
                                     unset($_SESSION['status']);
                                 }
                                 ?>
-                                <form class="user" action="signup_code.php" method="POST">
+                                <form class="user" action="signup_code.php" method="POST" id="signup-form">
                                     <div class="form-group">
-                                        <input type="text" name="company_name" class="form-control form-control-user" placeholder="Company name">
+                                        <input type="text" name="company_name" class="form-control form-control-user" placeholder="Company name" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email address">
+                                        <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email address" required>
                                     </div>
                                     <div class="form-group">
-                                    <input type="text" name="phone" class="form-control form-control-user" placeholder="Phone number">
+                                    <input type="text" name="phone" class="form-control form-control-user" placeholder="Phone number" required pattern="+2507[2,3,8][0-9]{8}">
                                     </div>
                                     <div class="form-group">
                                             <input type="hidden" class="form-control form-control-user" name="usertype" placeholder="Type of User (Admin/Company)" value="company">
                                         </div>
                                     <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
+                                                <input type="password" class="form-control form-control-user" name="password" placeholder="Password" required>
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="password" class="form-control form-control-user" name="cpassword" placeholder="Confirm Password">
+                                                <input type="password" class="form-control form-control-user" name="cpassword" placeholder="Confirm Password" required>
                                             </div>
                                         </div>
-                                    <button type="submit" name="signup_button" class="btn btn-primary btn-user btn-block">Signup</button>
+                                    <button type="submit" name="signup_button" id="signup-submit" class="btn btn-primary btn-user btn-block">Signup</button>
                                     <a type="submit" href="./login.php" class="btn btn-secondary btn-user btn-block">Login</a>
                                 </form>
                             </div>

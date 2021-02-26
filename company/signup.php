@@ -22,31 +22,31 @@ include('inc/header.php');
                                 </div>
                                 <?php
                                 if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-                                    echo '<div class="card border-left-danger" style=" border-radius: 0px; padding: 25px;">'. $_SESSION['status'] . '</div>';
+                                    echo '<div class="card border-left-danger" style=" border-radius: 0px; padding: 25px;">' . $_SESSION['status'] . '</div>';
                                     unset($_SESSION['status']);
                                 }
                                 ?>
                                 <form class="user" action="signup_code.php" method="POST" id="signup-form">
                                     <div class="form-group">
-                                        <input type="text" name="company_name" class="form-control form-control-user" placeholder="Company name" required>
+                                        <input type="text" name="company_name" class="form-control form-control-user" id="company_name" placeholder="Company name" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email address" required>
+                                        <input type="email" name="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Email address" required>
                                     </div>
                                     <div class="form-group">
-                                    <input type="text" name="phone" class="form-control form-control-user" placeholder="Phone number" required pattern="+2507[2,3,8][0-9]{8}">
+                                        <input type="text" name="phone" class="form-control form-control-user" id="phone" placeholder="Phone number" required pattern="+2507[2,3,8][0-9]{8}">
                                     </div>
                                     <div class="form-group">
-                                            <input type="hidden" class="form-control form-control-user" name="usertype" placeholder="Type of User (Admin/Company)" value="company">
-                                        </div>
+                                        <input type="hidden" class="form-control form-control-user" id="usertype" name="usertype" placeholder="Type of User (Admin/Company)" value="company">
+                                    </div>
                                     <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="password" class="form-control form-control-user" name="password" placeholder="Password" required>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input type="password" class="form-control form-control-user" name="cpassword" placeholder="Confirm Password" required>
-                                            </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password" required>
                                         </div>
+                                        <div class="col-sm-6">
+                                            <input type="password" class="form-control form-control-user" id="cpassword" name="cpassword" placeholder="Confirm Password" required>
+                                        </div>
+                                    </div>
                                     <button type="submit" name="signup_button" id="signup-submit" class="btn btn-primary btn-user btn-block">Signup</button>
                                     <a type="submit" href="./login.php" class="btn btn-secondary btn-user btn-block">Login</a>
                                 </form>
@@ -67,3 +67,21 @@ include('inc/header.php');
 include('inc/scripts.php');
 include('inc/footer.php');
 ?>
+
+<script>
+    jQuery('#signup-form').on('submit', function(e) {
+        jQuery('#signup-submit').val('Please wait...');
+        jQuery('#signup-submit').attr('disabled', true);
+        jQuery.ajax({
+            url: 'signup_code.php',
+            type: 'post',
+            data: jQuery('#signup-form').serialize(),
+            success: function(result) {
+                jQuery('#signup-form')['0'].reset();
+                jQuery('#signup-submit').val('Signup');
+                jQuery('#signup-submit').attr('disabled', false);
+            }
+        });
+        //    e.preventDefault();
+    });
+</script>

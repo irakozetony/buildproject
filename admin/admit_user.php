@@ -13,7 +13,7 @@ if(isset($_POST['admit_button'])){
         $username = $user['username'];
         $email = $user['email'];
         $phone = $user['phone'];
-        $type = $user['type'];
+        $type = $user['usertype'];
         $password = $user['password'];
 
         $query = "INSERT INTO companies (username, email, phone, password, usertype) VALUES('$username', '$email', '$phone', '$password', '$type')";

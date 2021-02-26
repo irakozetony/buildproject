@@ -1,5 +1,5 @@
 <?php
-
+sleep(5);
 include('security.php');
 
 if (isset($_POST['signup_button'])) {

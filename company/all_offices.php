@@ -13,12 +13,11 @@ include("inc/navbar.php");
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h6 class="m-0 font-weight-bold text-primary">Customers</h6>
-                        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile"><i class="fas fa-building fa-sm text-white-50"></i>    Add new office</button> -->
+                        <h6 class="m-0 font-weight-bold text-primary">Offices</h6>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile"><i class="fas fa-building fa-sm text-white-50"></i>    Add new office</button>
                     </div>
                 </div>
-                <!-- <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="addadminprofile" aria-hidden="true">
+                <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="addadminprofile" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -66,7 +65,7 @@ include("inc/navbar.php");
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="card-body">
 
                 <?php
@@ -84,7 +83,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                     <div class="table-responsive">
                         <?php
                         $owner = $_SESSION['username'];
-                        $query = "SELECT * FROM customers WHERE office_reserved_owner='$owner' AND status='approved'";
+                        $query = "SELECT * FROM offices WHERE owner='$owner'";
                         $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
 
                         ?>
@@ -92,13 +91,14 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                             <thead>
                                 <tr>
                                     <th>N<sup>o</sup></th>
-                                    <th>Client Name</th>
-                                    <th>Client Email</th>
-                                    <th>Client Phone</th>
-                                    <th>Reservation Date</th>
-                                    <th>Office Reserved</th>
-                                    <th>Status</th>
-                                    <th>Disapprove</th>
+                                    <th>Office name</th>
+                                    <th>Location</th>
+                                    <th>Office category</th>
+                                    <th>Office price</th>
+                                    <th>Office status</th>
+                                    <th>Image</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -111,15 +111,21 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                                         <tr>
                                             <td><?php echo $a; ?></td>
                                             <td><?php echo $row['name']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
-                                            <td><?php echo $row['phone']; ?></td>
-                                            <td><?php echo $row['reservation_date']; ?></td>
-                                            <td><?php echo $row['office_reserved']; ?></td>
+                                            <td><?php echo $row['location']; ?></td>
+                                            <td><?php echo $row['category']; ?></td>
+                                            <td><?php echo $row['price']; ?></td>
                                             <td><?php echo $row['status']; ?></td>
+                                            <td><?php echo $row['image']; ?></td>
                                             <td>
-                                                <form action="customers_code.php" method="POST">
-                                                    <input type="hidden" name="disapprove_id" value="<?php echo $row['id']; ?>">
-                                                    <button type="submit" class="btn btn-danger" name="disapprove_button">Disapprove</button>
+                                                <form action="officeedit.php" method="POST">
+                                                    <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
+                                                    <button type="submit" class="btn btn-success" name="edit_button">EDIT</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="officeedit_code.php" method="POST">
+                                                    <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+                                                    <button type="submit" class="btn btn-danger" name="delete_button">DELETE</button>
                                                 </form>
                                             </td>
                                         </tr>

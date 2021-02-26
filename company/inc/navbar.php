@@ -32,14 +32,15 @@
                 <div id="collapseOffices" class="collapse" aria-labelledby="headingOffices"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Available:</h6>
-                        <a class="collapse-item" href="to_rent_offices.php">Rent</a>
-                        <a class="collapse-item" href="to_sale_offices.php">Sale</a>
-                        <a class="collapse-item" href="available_offices.php">All</a>
-                        <h6 class="collapse-header">Occupied:</h6>
-                        <a class="collapse-item" href="rent_offices.php">Rent</a>
-                        <a class="collapse-item" href="sold_offices.php">Sold</a>
-                        <a href="occupied_offices" class="collapse-item">All</a>
+                        <h6 class="collapse-header">Rent</h6>
+                        <a class="collapse-item" href="to_rent_offices.php">Available</a>
+                        <a class="collapse-item" href="rent_offices.php">Occupied</a>
+                        <h6 class="collapse-header">Sell</h6>
+                        <a class="collapse-item" href="to_sell_offices.php">Available</a>
+                        <a class="collapse-item" href="sold_offices.php">Occupied</a>
+                        <hr class="sidebar-divider">
+                        <a class="collapse-item" href="all_offices.php">All Offices</a>
+
                     </div>
                 </div>
             </li>

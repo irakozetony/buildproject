@@ -76,22 +76,21 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
           <form action="contact_code.php" method="POST" class="user" id="contact-form">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <input type="text" id="contact-name" class="form-control form-control-user" name="name" placeholder="Your Name" required>
+                <input type="text" id="contact-name" class="form-control form-control-user" name="name" placeholder="Your Name" >
               </div>
               <div class="form-group col-md-6">
-                <input type="email" id="contact-email" class="form-control form-control-user" name="email" placeholder="Your Email" required>
+                <input type="email" id="contact-email" class="form-control form-control-user" name="email" placeholder="Your Email" >
               </div>
             </div>
             <div class="form-group">
-              <input type="text" id="contact-subject" class="form-control form-control-user" name="subject" placeholder="Subject" required>
+              <input type="text" id="contact-subject" class="form-control form-control-user" name="subject" placeholder="Subject" >
             </div>
             <div class="form-group">
-              <textarea name="message" id="contact-message" class="form-control form-control-user" placeholder="Message" required></textarea>
+              <textarea name="message" id="contact-message" class="form-control form-control-user" placeholder="Message" ></textarea>
             </div>
             <div class="text-center">
               <button type="submit" id="contact-submit" name="send" class="btn" style="background-color: #f03c02; color:white;">Send Message</button>
             </div>
-            <div id="thank-you-message" class="card border-bottom-success" style="border: 0;">
             </div>
           </form>
         </div>
@@ -108,21 +107,44 @@ include('inc/scripts.php');
 include('inc/footer.php');
 
 ?>
+
 <script>
-        jQuery('#contact-form').on('submit', function(e){
-          jQuery('#contact-submit').val('Please wait...');
-          Jquery('#contact-submit').attr('disabled', true);
-          jQuery.ajax({
-            url:'contact_code.php',
-            type:'post',
-            data: jQuery('#contact-form').serialize(),
-            success: function(result){
-              Jquery('#contact-form')['0'].reset();
-              jQuery('#contact-submit').val('Send Message');
-              Jquery('#contact-submit').attr('disabled', false);
-              Jquery('#thank-you-message').html('Thank You');
-            }
-          });
-          e.preventDefault();
-        });
+  jQuery('#contact-form').on('submit', function(e){
+    let name = $('#contact-name').val();
+    let email = $('#contact-email').val();
+    let subject = $('#contact-subject').val();
+    let message = $('#contact-message').val();
+
+    if(name == ''){
+      $('#contact-name').css('border-bottom', '#c00');
+      $('#contact-name').css('color', '#c00');
+    }
+    else if(email == ''){
+      $('#contact-email').css('border-bottom', '#c00');
+      $('#contact-email').css('color', '#c00');
+    }
+    else if(subject == ''){
+      $('#contact-subject').css('border-bottom', '#c00');
+      $('#contact-subject').css('color', '#c00');
+    }
+    else if(message == ''){
+      $('#contact-message').css('border-bottom', '#c00');
+      $('#contact-message').css('color', '#c00');
+    }
+    else{
+      jQuery('#contact-submit').val('Please wait...');
+    jQuery('#contact-submit').attr('disabled', true);
+    jQuery.ajax({
+      url:'contact_code.php',
+      type: 'POST',
+      data: jQuery('#contact-form').serialize(),
+      success: function(result){
+        jQuery('#contact-form')['0'].reset();
+        jQuery('#contact-submit').val('Send Message');
+        jQuery('#contact-submit').attr('disabled', false);
+      }
+    });
+    }
+    e.preventDefault();
+  });
 </script>

@@ -1,8 +1,8 @@
 <?php
 include('security.php');
 
-if (isset($_POST['approve_button'])) {
-    $id = $_POST['approve_id'];
+if (isset($_GET['approve_id'])) {
+    $id = $_GET['approve_id'];
     $status = "approved";
     $query = "UPDATE customers SET status='$status' WHERE id='$id'";
     $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
@@ -15,7 +15,7 @@ if (isset($_POST['approve_button'])) {
     $date = $selected_customer['reservation_date'];
     $phone = $selected_customer['phone'];
 
-    if ($query_run) {
+    if ($query_run) {  
         $update_office = "UPDATE offices JOIN customers on customers.office_reserved_id = offices.id set offices.status='occupied' WHERE customers.id='$id'";
         $update_office_run = mysqli_query($connection, $update_office) or die(mysqli_error($connection));
         $_SESSION['success'] = "Status updated: approved";
@@ -27,8 +27,8 @@ if (isset($_POST['approve_button'])) {
     }
 }
 
-if (isset($_POST['disapprove_button'])) {
-    $id = $_POST['disapprove_id'];
+if (isset($_GET['disapprove_id'])) {
+    $id = $_GET['disapprove_id'];
     $status = "rejected";
     $query = "UPDATE customers SET status='$status' WHERE id='$id'";
     $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
@@ -47,7 +47,7 @@ function sendSMS($name, $date, $phone)
     $data    =    array(
         "sender" => '+250788622754',
         "recipients" => $phone,
-        "message" => 'Hello' .$name. ', your reservation for the office on ' .$date . ' has been approved. Thank you for working with us'
+        "message" => 'Hello ' .$name. ', your reservation for the office on ' .$date . ' has been approved. Thank you for working with us'
     );
     $url    =    "https://www.intouchsms.co.rw/api/sendsms/.json";
     $data    =    http_build_query($data);

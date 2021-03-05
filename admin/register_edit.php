@@ -9,14 +9,14 @@ include('inc/navbar.php');
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                Edit Admin Profile
+                Edit User Profile
             </h6>
         </div>
         <div class="card-body">
             <?php
             require('database/dbconnection.php');
-            if (isset($_POST['edit_button'])) {
-                $id = $_POST['edit_id'];
+            if (isset($_GET['edit_id'])) {
+                $id = $_GET['edit_id'];
                 $query = "SELECT * FROM users WHERE id='$id'";
                 $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
 

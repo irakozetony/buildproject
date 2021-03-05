@@ -1,9 +1,6 @@
 <?php
-sleep(5);
 include('security.php');
-
-if (isset($_POST['signup_button'])) {
-
+    $company_name = $company_email = $company_phone = $password = $cpassword = '';
     $company_name = mysqli_real_escape_string($connection, $_POST['company_name']);
     $company_email = mysqli_real_escape_string($connection, $_POST['email']);
     $company_phone = mysqli_real_escape_string($connection, $_POST['phone']);
@@ -61,4 +58,3 @@ if (isset($_POST['signup_button'])) {
         $_SESSION['status'] = 'Password and confirm password do not match';
         header("location:signup.php");
     }
-}

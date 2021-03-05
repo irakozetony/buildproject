@@ -16,7 +16,7 @@ include("inc/navbar.php");
                         <h6 class="m-0 font-weight-bold text-primary">Adminstrators</h6>
                     </div>
                 </div>
-                
+
                 <div class="card-body">
 
                     <?php

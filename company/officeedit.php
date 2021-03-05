@@ -14,8 +14,8 @@ include('inc/navbar.php');
         </div>
         <div class="card-body">
             <?php
-            if (isset($_POST['edit_button'])) {
-                $id = $_POST['edit_id'];
+            if (isset($_GET['edit_button'])) {
+                $id = $_GET['edit_id'];
                 $query = "SELECT * FROM offices WHERE id='$id'";
                 $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
 

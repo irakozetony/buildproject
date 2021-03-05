@@ -117,16 +117,22 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                                             <td><?php echo $row['status']; ?></td>
                                             <td><?php echo $row['image']; ?></td>
                                             <td>
-                                                <form action="officeedit.php" method="POST">
+                                                <!-- <form action="officeedit.php" method="POST">
                                                     <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                                                     <button type="submit" class="btn btn-success" name="edit_button">EDIT</button>
-                                                </form>
+                                                </form> -->
+                                                <a href="officeedit.php?edit_id=<?php echo $row['id']; ?>">
+                                                <button class="btn btn-success">Edit</button>
+                                                </a>
                                             </td>
                                             <td>
-                                                <form action="officeedit_code.php" method="POST">
+                                                <!-- <form action="officeedit_code.php" method="POST">
                                                     <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                                                     <button type="submit" class="btn btn-danger" name="delete_button">DELETE</button>
-                                                </form>
+                                                </form> -->
+                                                <a href="officeedit_code.php?delete_id=<?php echo $row['id']; ?>">
+                                                <button class="btn btn-danger">Delete</button>
+                                                </a>
                                             </td>
                                         </tr>
                                 <?php

@@ -68,21 +68,20 @@ include("inc/navbar.php");
                 </div>
                 <div class="card-body">
 
-                <?php
+                    <?php
 
-if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-    echo '<div class="card border-left-success" style=" border-radius: 0px; padding: 25px;">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']);
-}
-if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-    echo '<div class="card border-left-danger" style=" border-radius: 0px; padding: 25px;">' . $_SESSION['status'] . '</div>';
-    unset($_SESSION['status']);
-}
+                    if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
+                        echo '<div class="card border-left-success" style=" border-radius: 0px; padding: 25px;">' . $_SESSION['success'] . '</div>';
+                        unset($_SESSION['success']);
+                    }
+                    if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+                        echo '<div class="card border-left-danger" style=" border-radius: 0px; padding: 25px;">' . $_SESSION['status'] . '</div>';
+                        unset($_SESSION['status']);
+                    }
 
-?>
+                    ?>
                     <div class="table-responsive">
                         <?php
-
                         require('database/dbconnection.php');
                         $query = "SELECT * FROM users";
                         $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
@@ -98,6 +97,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                                     <th>User Type</th>
                                     <th>Password</th>
                                     <th>Edit</th>
+                                    <th>Pdf</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -116,16 +116,20 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                                             <td><?php echo $row['usertype']; ?></td>
                                             <td><?php echo $row['password']; ?></td>
                                             <td>
-                                                <form action="register_edit.php" method="POST">
-                                                    <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                                                    <button type="submit" class="btn btn-success" name="edit_button">EDIT</button>
-                                                </form>
+
+                                                <a href="register_edit.php?edit_id=<?php echo $row['id']; ?>">
+                                                    <button class="btn btn-success">Edit</button>
+                                                </a>
                                             </td>
                                             <td>
-                                                <form action="code.php" method="POST">
-                                                    <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
-                                                    <button type="submit" class="btn btn-danger" name="delete_button">DELETE</button>
-                                                </form>
+                                                <a href="output_files/specific.php?user=<?php echo $row['id']; ?>">
+                                                    <button class="btn btn-info">View</button>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="code.php?delete_id=<?php echo $row['id']; ?>">
+                                                    <button class="btn btn-danger">DELETE</button>
+                                                </a>
                                             </td>
                                         </tr>
                                 <?php

@@ -182,7 +182,6 @@ include('inc/navbar.php');
             $('#end_date').css('border-bottom-color', '#c00');
             $('#end_date').css('border-bottom-color', '#c00');
         } else {
-            alert("Say something");
             $('#period').load('report_result.php?start_date=' + day1 + '&end_date=' + day2);
         }
     }

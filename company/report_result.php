@@ -12,7 +12,7 @@ include('security.php');
                 <div class="card-header py-3">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h6 class="m-0 font-weight-bold text-primary">Occupied Office</h6>
-                        <button type="button" class="btn btn-primary"><i class="fas fa-building fa-sm text-white-50"></i>Export</button>
+                        
                     </div>
                 </div>
                 <div class="card-body">
@@ -78,6 +78,7 @@ include('security.php');
                                 }
                                 ?>
                             </tbody>
+                            <a href="output_files/report_gen.php?start_date=<?php echo $start;?>&end_date=<?php echo $end; ?>" type="button" class="btn btn-primary align-self-end"><i class="fas fa-building fa-sm text-white-50"></i>Export</a>
                         </table>
                     </div>
                 </div>

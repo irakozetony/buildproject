@@ -65,16 +65,16 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                                             <td><?php echo $row['usertype']; ?></td>
                                             <td><?php echo $row['password']; ?></td>
                                             <td>
-                                                <form action="admit_user.php" method="POST">
-                                                    <input type="hidden" name="admit_id" value="<?php echo $row['id']; ?>">
-                                                    <button type="submit" class="btn btn-success" name="admit_button">ADMIT</button>
-                                                </form>
+                                                
+                                                <a href="admit_user.php?admit_id=<?php echo $row['id']; ?>">
+                                                    <button class="btn btn-success">Admit</button>
+                                                </a>
                                             </td>
                                             <td>
-                                                <form action="code.php" method="POST">
-                                                    <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
-                                                    <button type="submit" class="btn btn-danger" name="delete_button">REJECT</button>
-                                                </form>
+                                                
+                                                <a href="code.php?delte_id=<?php echo $row['id']; ?>">
+                                                <button class="btn btn-danger">Delete</button>
+                                            </a>
                                             </td>
                                         </tr>
                                 <?php

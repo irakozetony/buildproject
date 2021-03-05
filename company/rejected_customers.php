@@ -116,10 +116,13 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                                             <td><?php echo $row['office_reserved']; ?></td>
                                             <td><?php echo $row['status']; ?></td>
                                             <td>
-                                                <form action="customers_code.php" method="POST">
+                                                <!-- <form action="customers_code.php" method="POST">
                                                     <input type="hidden" name="approve_id" value="<?php echo $row['id']; ?>">
                                                     <button type="submit" class="btn btn-success" name="approve_button">Approve</button>
-                                                </form>
+                                                </form> -->
+                                                <a href="customers_code.php?approve_id=<?php echo $row['id']; ?>">
+                                                <button class="btn btn-success">Approve</button>
+                                                </a>
                                             </td>
                                         </tr>
                                 <?php

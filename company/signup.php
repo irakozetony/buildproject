@@ -28,23 +28,23 @@ include('inc/header.php');
                                 ?>
                                 <form class="user" action="signup_code.php" method="POST" id="signup-form">
                                     <div class="form-group">
-                                        <input type="text" name="company_name" class="form-control form-control-user" id="company_name" placeholder="Company name" required>
+                                        <input type="text" name="company_name" class="form-control form-control-user" id="company_name" placeholder="Company name" >
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Email address" required>
+                                        <input type="email" name="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp" placeholder="Email address" >
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="phone" class="form-control form-control-user" id="phone" placeholder="Phone number" required pattern="+2507[2,3,8][0-9]{8}">
+                                        <input type="text" name="phone" class="form-control form-control-user" id="phone" placeholder="Phone number" >
                                     </div>
                                     <div class="form-group">
                                         <input type="hidden" class="form-control form-control-user" id="usertype" name="usertype" placeholder="Type of User (Admin/Company)" value="company">
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password" required>
+                                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="password" class="form-control form-control-user" id="cpassword" name="cpassword" placeholder="Confirm Password" required>
+                                            <input type="password" class="form-control form-control-user" id="cpassword" name="cpassword" placeholder="Confirm Password">
                                         </div>
                                     </div>
                                     <button type="submit" name="signup_button" id="signup-submit" class="btn btn-primary btn-user btn-block">Signup</button>
@@ -69,8 +69,34 @@ include('inc/footer.php');
 ?>
 
 <script>
+
     jQuery('#signup-form').on('submit', function(e) {
-        jQuery('#signup-submit').val('Please wait...');
+        let name = $('#company_name').val();
+        let email = $('#email').val();
+        let phone = $('#phone').val();
+        let password = $('#password').val();
+        let cpassword = $('#cpassword').val();
+
+        if(name ==''){
+            $('#company_name').css('border-bottom-color', '#c00');
+            $('#company_name').css('color', '#c00');
+        }
+        else if(email == ''){
+            $('#email').css('border-bottom-color', '#c00');
+            $('#email').css('color', '#c00');
+        }
+        else if(phone == ''){
+            $('#phone').css('border-bottom-color', '#c00');
+            $('#phone').css('color', '#c00');
+        }
+        else if(((password == '') || (cpassword == '')) || (password != cpassword)){
+            $('#password').css('border-bottom-color', '#c00');
+            $('#cpassword').css('border-bottom-color', '#c00');
+            $('#password').css('color', '#c00');
+            $('#cpassword').css('color', '#c00');
+        }
+        else{
+            jQuery('#signup-submit').val('Please wait...');
         jQuery('#signup-submit').attr('disabled', true);
         jQuery.ajax({
             url: 'signup_code.php',
@@ -81,7 +107,9 @@ include('inc/footer.php');
                 jQuery('#signup-submit').val('Signup');
                 jQuery('#signup-submit').attr('disabled', false);
             }
-        });
-        //    e.preventDefault();
+
+        });   
+        }
+        e.preventDefault();
     });
 </script>

@@ -1,8 +1,6 @@
 <?php
 session_start();
 include('database/dbconnection.php');
-
-if(isset($_POST['send'])){
     $name = mysqli_real_escape_string($connection, $_POST['name']);
     $email = mysqli_real_escape_string($connection, $_POST['email']);
     $subject = mysqli_real_escape_string($connection, $_POST['subject']);
@@ -20,5 +18,4 @@ if(isset($_POST['send'])){
         $_SESSION['status'] = "message not sent";
         header('location: contact.php');
     }
-}
 ?>

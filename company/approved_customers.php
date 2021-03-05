@@ -117,10 +117,9 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
                                             <td><?php echo $row['office_reserved']; ?></td>
                                             <td><?php echo $row['status']; ?></td>
                                             <td>
-                                                <form action="customers_code.php" method="POST">
-                                                    <input type="hidden" name="disapprove_id" value="<?php echo $row['id']; ?>">
-                                                    <button type="submit" class="btn btn-danger" name="disapprove_button">Disapprove</button>
-                                                </form>
+                                                <a href="customers_code.php?disapprove_id=<?php echo $row['id']; ?>">
+                                                <button class="btn btn-danger">Disapprove</button>
+                                            </a>
                                             </td>
                                         </tr>
                                 <?php

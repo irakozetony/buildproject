@@ -86,8 +86,8 @@ if (isset($_POST['update_button'])) {
     }
 }
 
-if (isset($_POST['delete_button'])) {
-    $id = $_POST['delete_id'];
+if (isset($_GET['delete_id'])) {
+    $id = $_GET['delete_id'];
 
     $query = "DELETE FROM users WHERE id='$id'";
     $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));

@@ -88,13 +88,10 @@ if (isset($_POST['update_button'])) {
 
 if (isset($_GET['delete_id'])) {
     $id = $_GET['delete_id'];
-
     $query = "DELETE FROM users WHERE id='$id'";
     $query_run = mysqli_query($connection, $query) or die(mysqli_error($connection));
+
     if ($query_run) {
-        $query = "DELETE FROM offices JOIN offices.owner=companies.email WHERE users.id='$id'";
-        $query_run = mysqli_query($connection,$query) or die(mysqli_error($connection));
-        
         $_SESSION['success'] = "Profile Deleted Successfully";
         header("location:admins.php");
     } else {
